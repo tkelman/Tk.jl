@@ -318,6 +318,7 @@ to_tcl(x::Tk_Image) = x.w
 
 function Image(fname::String)
     if isfile(fname)
+        @windows_only fname = replace(fname, "\\", "\\\\")
         w = tcl(I"image create photo", file = fname)
         Tk_Image(w)
     else
